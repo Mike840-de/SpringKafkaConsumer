@@ -1,5 +1,7 @@
 package com.example.kafka;
 
+import com.example.kafka.dto.UserDto;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -10,8 +12,13 @@ import org.springframework.kafka.annotation.KafkaListener;
 public class DemoApplication {
 
 	@KafkaListener(topics="msg")
-	public void msgListener(String msg){
-		System.out.println(msg);
+	public void msgListener(ConsumerRecord<Long, UserDto> record){
+//		System.out.println(record.value().getAge());
+//		System.out.println(record.value().getName());
+		System.out.println(record.key());
+		System.out.println(record.value());
+		System.out.println(record.headers());
+		System.out.println(record.partition());
 	}
 
 	public static void main(String[] args) {
