@@ -12,13 +12,14 @@ import org.springframework.kafka.annotation.KafkaListener;
 public class DemoApplication {
 
 	@KafkaListener(topics="msg")
-	public void msgListener(ConsumerRecord<Long, UserDto> record){
-//		System.out.println(record.value().getAge());
-//		System.out.println(record.value().getName());
-		System.out.println(record.key());
-		System.out.println(record.value());
-		System.out.println(record.headers());
-		System.out.println(record.partition());
+//	public void msgListener(ConsumerRecord<Long, UserDto> record){
+	public void msgListener(UserDto userDto){
+		System.out.println(userDto.getAge());
+		System.out.println(userDto.getName());
+//		System.out.println(record.key());
+//		System.out.println(record.value().getName()+" + "+record.value().getAge());
+//		System.out.println(record.headers());
+//		System.out.println(record.partition());
 	}
 
 	public static void main(String[] args) {
