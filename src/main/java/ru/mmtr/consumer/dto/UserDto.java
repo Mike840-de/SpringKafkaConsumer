@@ -1,4 +1,4 @@
-package com.example.kafka.dto;
+package ru.mmtr.consumer.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

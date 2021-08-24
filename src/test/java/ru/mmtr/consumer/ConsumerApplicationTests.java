@@ -1,10 +1,10 @@
-package com.example.kafka;
+package ru.mmtr.consumer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class ConsumerApplicationTests {
 
 	@Test
 	void contextLoads() {

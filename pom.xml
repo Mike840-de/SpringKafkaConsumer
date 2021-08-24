@@ -8,13 +8,13 @@
 		<version>2.5.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>ru.mmtr</groupId>
+	<artifactId>consumer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>consumer</name>
 	<properties>
 		<java.version>11</java.version>
+		<generator.datelibrary>${basedir}/src/main/java/ru.mmtr.producer/client</generator.datelibrary>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -48,6 +48,17 @@
 			<artifactId>validation-api</artifactId>
 			<version>2.0.1.Final</version>
 		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -63,6 +74,38 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>io.swagger</groupId>
+				<artifactId>swagger-codegen-maven-plugin</artifactId>
+				<version>2.4.21</version>
+				<executions>
+					<execution>
+						<id>client-gis</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${basedir}/src/main/resources/swagger/api-docs.json</inputSpec>
+							<artifactId>contract-service</artifactId>
+							<output>${basedir}/target/generated-sources</output>
+							<language>spring</language>
+							<modelPackage>ru.mmtr.gis.v1.model</modelPackage>
+							<apiPackage>ru.mmtr.gis.v1.api</apiPackage>
+							<!-- <invokerPackage>ru.payhub.rest.v1.handler</invokerPackage> -->
+							<generateSupportingFiles>false</generateSupportingFiles>
+							<configOptions>
+								<sourceFolder>src/main/java</sourceFolder>
+								<interfaceOnly>true</interfaceOnly>
+								<library>spring-boot</library>
+								<dateLibrary>${generator.datelibrary}</dateLibrary>
+								<configPackage>ru.mmtr.config</configPackage>
+								<singleContentTypes>true</singleContentTypes>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
